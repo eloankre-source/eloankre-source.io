@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Surprise 💕</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:#654858;
+  background:radial-gradient(circle at 12% 8%,#ffd5e5 0,transparent 30%),
+             radial-gradient(circle at 90% 90%,#ffe8f0 0,transparent 35%),#fffafd;
+  overflow:hidden;
+}
+.cloud{
+  position:fixed;width:130px;height:42px;background:#fff;
+  border:3px solid #f7dce7;border-radius:50px;opacity:.92;
+  box-shadow:0 7px 18px rgba(214,133,163,.12);
+  z-index:0;animation:drift 7s ease-in-out infinite;
+}
+.cloud:before,.cloud:after{
+  content:"";position:absolute;background:#fff;border:3px solid #f7dce7;
+  border-bottom:0;border-radius:50%;
+}
+.cloud:before{width:54px;height:54px;left:18px;top:-29px}
+.cloud:after{width:68px;height:68px;right:15px;top:-39px}
+.cloud.one{top:10%;left:4%;transform:scale(.82);animation-delay:-1s}
+.cloud.two{top:20%;right:2%;transform:scale(.68);animation-delay:-4s}
+.cloud.three{bottom:9%;left:3%;transform:scale(.58);animation-delay:-2.5s}
+.cloud.four{bottom:18%;right:0%;transform:scale(.9);animation-delay:-5s}
+.card{
+  position:relative;z-index:2;width:min(92vw,520px);padding:36px 26px;text-align:center;
+  border:1px solid #f5d5e1;border-radius:32px;background:rgba(255,255,255,.96);
+  box-shadow:0 24px 65px rgba(190,104,137,.18);backdrop-filter:blur(14px)
+}
+.heart{font-size:52px;animation:float 2.8s ease-in-out infinite}
+h1{margin:12px 0 8px;font-size:clamp(32px,8vw,46px);color:#d95f8d;letter-spacing:-1px}
+.subtitle{color:#987487;margin:0 auto 27px;line-height:1.65}
+.buttons{display:grid;gap:12px}
+button{
+  border:0;border-radius:16px;padding:15px 18px;font-size:16px;font-weight:700;color:white;
+  cursor:pointer;background:linear-gradient(135deg,#f28aae,#e66c98);
+  box-shadow:0 7px 18px rgba(233,109,152,.22);transition:.18s
+}
+button:hover{transform:translateY(-2px);filter:brightness(1.06)}
+button:active{transform:scale(.97)}
+.message{
+  display:none;margin-top:22px;padding:20px;border-radius:21px;line-height:1.7;
+  background:#fff1f6;border:1px solid #f5d4e1;animation:appear .45s ease
+}
+.message.show{display:block}
+.secret{margin-top:22px;font-size:13px;color:#b28c9d}
+.secret span{cursor:pointer;text-decoration:underline dotted}
+.particle{position:fixed;pointer-events:none;animation:fall 1.8s ease-out forwards;z-index:10}
+@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-8px) rotate(3deg)}}
+@keyframes drift{0%,100%{margin-top:0}50%{margin-top:-10px}}
+@keyframes fall{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--x),var(--y)) rotate(360deg) scale(.5)}}
+</style>
+</head>
+<body>
+<div class="cloud one"></div>
+<div class="cloud two"></div>
+<div class="cloud three"></div>
+<div class="cloud four"></div>
+
+<main class="card">
+<div class="heart">💕💕💕</div>
+<h1>For my Kevin 💞</h1>
+<p class="subtitle">I started making this for you so you can hopefully feel better and i'm happy that you are right now ❤<br>there's a secret but i'm sure you'll find it, also it's probably not my last surprise like this 😼 ♡</p>
+<div class="buttons">
+<button onclick="reveal('message1')">💌 You're</button>
+<button onclick="reveal('message2')">the best thing</button>
+<button onclick="surprise()">in my life❤❤❤</button>
+</div>
+<div id="message1" class="message">you mean way more than you could imagine, i love you, I'm really happy you're in my life. 💕</div>
+<div id="message2" class="message">i know sometimes you're feeling down or you're tired and i'm happy that you're able to tell me when you don't feel like talking, i'm so proud of you ☺ 
+<em>also if you didn't find the secret press on Pusheen</em> :3</div>
+<div id="secret" class="message"><strong><em>GOOD BOY</em>😘</strong><br><br>you're really exeptional 💞<br><br><strong>I love you. ❤️</strong></div>
+<div class="secret">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8-oRSZ3LPsjfx7puNvhobxsHJxQ0s2cTC-JTjeqqtMw&s=10"
+       style="width:50px; height:auto; display:block; margin:20px auto; cursor:pointer;"
+       onclick="secret()">
+</div>
+</main>
+
+<script>
+function reveal(id){
+  document.querySelectorAll('.message').forEach(m=>{if(m.id!=='secret')m.classList.remove('show')});
+  document.getElementById(id).classList.add('show')
+}
+function secret(){document.getElementById('secret').classList.add('show');surprise()}
+function surprise(){
+  const s=['💗','💕','🌸','✨','💖','🎀'];
+  for(let i=0;i<28;i++){
+    const p=document.createElement('div');p.className='particle';
+    p.textContent=s[Math.floor(Math.random()*s.length)];
+    p.style.left=(50+(Math.random()-.5)*25)+'vw';p.style.top='50vh';
+    p.style.setProperty('--x',((Math.random()-.5)*70)+'vw');
+    p.style.setProperty('--y',((Math.random()-.5)*80)+'vh');
+    p.style.fontSize=(14+Math.random()*18)+'px';
+    document.body.appendChild(p);setTimeout(()=>p.remove(),1900)
+  }
+}
+</script>
+</body>
+</html>
